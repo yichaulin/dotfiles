@@ -1,0 +1,45 @@
+# Add your local tmux config here
+
+# 設定 leader key為 `
+set-option -g prefix `
+
+# 設定 -r time
+set -g repeat-time 500
+
+# Split Window
+bind-key v split-window -h -c "#{pane_current_path}"
+bind-key s split-window -v -c "#{pane_current_path}"
+bind-key | split-window -h -c "#{pane_current_path}"
+bind-key \ split-window -h -c "#{pane_current_path}"
+bind-key - split-window -v -c "#{pane_current_path}"
+bind-key _ split-window -v -c "#{pane_current_path}"
+
+# Move Window
+bind ` last-window
+# bind h select-window -p
+# bind l next-window
+bind Left select-window -p
+bind Right next-window
+bind -r n select-window -t :+
+
+# Move Pane
+# bind j select-pane -t :.+
+# bind k select-pane -t :.-
+bind -r o select-pane -t :.+
+
+# Resize Pane
+bind -r H resize-pane -L 5
+bind -r J resize-pane -D 5
+bind -r K resize-pane -U 5
+bind -r L resize-pane -R 5
+
+#zoom pane
+bind z break-pane
+bind Z join-pane -t :-
+
+# copy and paste
+bind v copy-mode
+bind p paste-buffer -p
+bind P choose-buffer "paste-buffer -p -b '%%'"
+bind PageUp copy-mode -u
+bind PageDown copy-mode
