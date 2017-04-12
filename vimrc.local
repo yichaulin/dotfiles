@@ -31,16 +31,6 @@ nmap <leader>hl :let @/ = ""<CR>
 " easyAlign
 vmap <Enter> <Plug>(EasyAlign)
 
-" gui settings
-if (&t_Co == 256 || has('gui_running'))
-  if ($TERM_PROGRAM == 'iTerm.app')
-    colorscheme solarized
-  else
-    colorscheme desert
-  endif
-endif
-
-
 map <Leader>e <Plug>(easymotion-w)
 nmap <Leader>E <Plug>(easymotion-overwin-w)
 xmap <Leader>E <Plug>(easymotion-bd-w)
@@ -84,7 +74,7 @@ silent! autocmd VimEnter * RemoveConflictingAlignMaps
 
 " theme
 set background=dark
-colorscheme solarized
+colorscheme blues
 set tabstop=2
 
 

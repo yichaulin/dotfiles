@@ -52,7 +52,7 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git)
-
+path=($path "$HOME/bin")
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -249,7 +249,7 @@ alias rc='rails console development'
 alias rm='rm -i'
 alias be='bundle exec'
 alias dump_db='/vagrant/var/scripts/dump_db.zsh'
-
+alias rlog='tail -f log/development.log'
 
 
 
