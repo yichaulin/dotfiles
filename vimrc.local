@@ -160,7 +160,7 @@ function! s:rails_test_helpers()
   let type = rails#buffer().type_name()
   let relative = rails#buffer().relative()
   if type =~ '^test' || (type == 'javascript-coffee' && relative =~ '^test/')
-    nmap <Leader>t [rtest]
+    nmap \t [rtest]
     nnoremap <silent> [rtest]j :call <SID>rails_test_tmux('v')<CR>
     nnoremap <silent> [rtest]l :call <SID>rails_test_tmux('h')<CR>
     nnoremap <silent> [rtest]w :call <SID>rails_test_tmux('new-window')<CR>

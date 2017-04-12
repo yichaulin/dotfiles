@@ -2,13 +2,13 @@
 # *color* 'area' 'fgcolor' 'bgcolor' '[attributes]'
 
 # general
-color   default                 15      235
+color   default                 250     default
 color   cursor                  15      241
 color   title-focus             242     221
 color   title-blur              242     221
 color   delimiter               213     default
-color   author                  156     default
-color   date                    81      default
+color   author                  196     default
+color   date                    33      default
 color   line-number             221     default
 color   mode                    255     default
 
