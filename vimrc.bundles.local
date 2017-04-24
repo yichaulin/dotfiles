@@ -1,1 +1,2 @@
 Plugin 'junegunn/vim-easy-align'
+Plugin 'vim-multiple-cursors'
