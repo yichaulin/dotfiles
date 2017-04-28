@@ -17,19 +17,19 @@ nmap <Leader>rc :SlimuxShellConfigure<CR>
 
 inoremap jj <ESC>
 inoremap ,, <ESC>
-inoremap ( ()<Esc>i
-inoremap ' ''<Esc>i
-inoremap " ""<Esc>i
-inoremap [ []<Esc>i
-inoremap { {}<Esc>i
+inoremap (<tab> ()<Esc>i
+inoremap '<tab> ''<Esc>i
+inoremap "<tab> ""<Esc>i
+inoremap [<tab> []<Esc>i
+inoremap {<tab> {}<Esc>i
 noremap  <Leader>, <C-\><C-N>
 noremap! <Leader>, <C-\><C-N>
 " noremap! ,, <C-\><C-N>
 " snoremap ,, <C-\><C-N>
 
 " Tab change
-nnoremap gh gT
-nnoremap gl gt
+nnoremap <S-tab> gT
+nnoremap <tab> gt
 
 " highlight search
 set hlsearch
