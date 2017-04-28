@@ -17,12 +17,19 @@ nmap <Leader>rc :SlimuxShellConfigure<CR>
 
 inoremap jj <ESC>
 inoremap ,, <ESC>
+inoremap ( ()<Esc>i
+inoremap ' ''<Esc>i
+inoremap " ""<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
 noremap  <Leader>, <C-\><C-N>
 noremap! <Leader>, <C-\><C-N>
 " noremap! ,, <C-\><C-N>
 " snoremap ,, <C-\><C-N>
 
-nnoremap gr gT
+" Tab change
+nnoremap gh gT
+nnoremap gl gt
 
 " highlight search
 set hlsearch
@@ -55,6 +62,18 @@ let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_enter_jump_first = 1
 map <Nop> <Plug>(easymotion-prefix)
 
+" multiple cursor plugin setting
+
+let g:multi_cursor_next_key='<C-n>'
+let g:multi_cursor_prev_key='<C-p>'
+let g:multi_cursor_skip_key='<C-x>'
+let g:multi_cursor_quit_key='<C-m>'
+
+"   各種移動    {{{2}}}"
+nnoremap <expr> <Space>  <SID>scroll_down()
+nnoremap <expr> <Leader><Space> <SID>scroll_up()
+xnoremap <expr> <Space>  <SID>scroll_down('v')
+xnoremap <expr> <Leader><Space> <SID>scroll_up('v')'')'')))
 
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.
 "
@@ -77,7 +96,27 @@ set background=dark
 colorscheme blues
 set tabstop=2
 
+function! s:scroll_down(...)
+  let mode = a:0 ? a:1 : 'n'
+  let l:count = a:0 > 1 ? a:2 : 2
 
+  if has("gui_running") || winnr('$') > 1
+    return '7j'
+  else
+    return repeat("\<ScrollWheelDown>", l:count)
+  endif
+endfunction
+
+function! s:scroll_up(...)
+  let mode = a:0 ? a:1 : 'n'
+  let l:count = a:0 > 1 ? a:2 : 2
+
+  if has("gui_running") || winnr('$') > 1
+    return '7k'
+  else
+    return repeat("\<ScrollWheelUp>", l:count)
+  endif
+endfunction
 
 function! TmuxNewWindow(...)
   let options = a:0 ? a:1 : {}
