@@ -22,6 +22,7 @@ inoremap '<tab> ''<Esc>i
 inoremap "<tab> ""<Esc>i
 inoremap [<tab> []<Esc>i
 inoremap {<tab> {}<Esc>i
+inoremap %<tab> <% %><Esc>hhi
 noremap  <Leader>, <C-\><C-N>
 noremap! <Leader>, <C-\><C-N>
 " noremap! ,, <C-\><C-N>
