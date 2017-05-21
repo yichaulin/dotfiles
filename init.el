@@ -4,33 +4,21 @@
 ;; just comment it out by adding a semicolon to the start of the line.
 ;; You may delete these explanatory comments.
 
-;; install packages
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (package-initialize)
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  )
-(require 'cl)
 
-;; add whatever packages you want here
-(defvar max/packages '(company monokai-theme hungry-delete swiper counsel smartparens
-			       js2-mode nodejs-repl) "Default packages")
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
 
-(setq package-selected-packages max/packages)
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(require 'init-packages)
+(setq ring-bell-function 'ignore)
 
-(defun max/packages-installed-p()
-  (loop for pkg in max/packages
-	when (not (package-installed-p pkg)) do (return nil)
-	finally (return t)))
-(unless (max/packages-installed-p)
-  (message "%s" "Refreshing package database...")
-  (package-refresh-contents)
-  (dolist (pkg max/packages)
-    (when (not (package-installed-p pkg))
-      (package-install pkg))))
-               
+;; auto reload file
+(global-auto-revert-mode t)
   
-;; turn off tool bar
+;; turn off tool barba
 (tool-bar-mode -1)
 ;; trun off scroll bar
 (scroll-bar-mode -1)
@@ -46,11 +34,15 @@
 
 (global-set-key (kbd "<f2>") 'open-my-init-file)
 
-;; auto use company(complete-any) mode
-(global-company-mode t)
+
+(abbrev-mode t)
+(define-abbrev-table 'global-abbrev-table '(("mx" "max da da")))
 
 ;; don't backup file
 (setq make-backup-files nil)
+
+;; turn off auto save
+(setq auto-save-default nil)
 
 ;; open recent file mode
 (require 'recentf)
@@ -70,17 +62,8 @@
 ;; hilight current line
 (global-hl-line-mode t)
 
-;; load monokai theme
-(load-theme 'monokai t)
 
-;; config for hungry-delete
-(require 'hungry-delete)
-(global-hungry-delete-mode)
 
-;; config for swiper
-(ivy-mode 1)
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
 (global-set-key "\C-s" 'swiper)
 (global-set-key (kbd "C-c C-r") 'ivy-resume)
 (global-set-key (kbd "<f6>") 'ivy-resume)
@@ -89,15 +72,7 @@
 (global-set-key (kbd "<f1> f") 'counsel-describe-function)
 (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
 
-;; config for smartparens
-(require 'smartparens-config)
-(smartparens-global-mode t)
 
-;; config for js files
-(setq auto-mode-alist
-      (append
-       '(("\\.js\\'" . js2-mode))
-       auto-mode-alist))
 
 (global-set-key (kbd "C-h C-f") 'find-function)
 (global-set-key (kbd "C-h C-v") 'find-variable)
