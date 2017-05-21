@@ -25,7 +25,6 @@
       (package-install pkg))))
 
 ;; config for smartparens
-(require 'smartparens-config)
 (smartparens-global-mode t)
 
 ;; config for hungry-delete
