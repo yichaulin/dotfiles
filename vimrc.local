@@ -3,8 +3,15 @@ set nolist
 set hidden
 set noswapfile
 
+" save
+inoremap <C-s> <ESC>:w<CR>
+noremap <C-s> :w<CR>
+" quit
+noremap <C-q> :q<CR>
+noremap <C-b><C-d> :bd<CR>
+
 " keyboard shortcuts
-nmap <leader>w <C-w>
+nmap <silent> <leader>w <C-w>
 nnoremap <silent> <tab> :bn<CR>
 nnoremap <silent> <S-tab> :bp<CR>
 nmap <leader>nl :set invlist list?<CR>    
@@ -23,10 +30,6 @@ inoremap "<tab> ""<Esc>i
 inoremap [<tab> []<Esc>i
 inoremap {<tab> {}<Esc>i
 inoremap %<tab> <% %><Esc>hhi
-noremap  <Leader>, <C-\><C-N>
-noremap! <Leader>, <C-\><C-N>
-" noremap! ,, <C-\><C-N>
-" snoremap ,, <C-\><C-N>
 
 " Tab change
 nnoremap <S-tab> gT

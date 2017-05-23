@@ -1,3 +1,15 @@
+# 常用 alias
+alias n='cd nerv'
+alias ll='ls -al'
+alias rc='rails console development'
+
+alias rm='rm -i'
+alias be='bundle exec'
+alias dump_db='/vagrant/var/scripts/dump_db.zsh'
+alias rlog='tail -f log/development.log'
+
+
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -87,6 +99,8 @@ source $ZSH/oh-my-zsh.sh
 # disable START/STOP output control (<C-S>, <C-Q>)
 stty -ixon
 
+# bindkey '^[' forward-word                        # [Ctrl-RightArrow] - move forward one word
+# bindkey '^[' backward-word 
 
 
 # 檢查 ruby 語法
@@ -238,18 +252,6 @@ rserver_restart() {
       echo 'invalid argument'
   esac
 }
-
-
-
-# 常用 alias
-alias n='cd nerv'
-alias ll='ls -al'
-alias rc='rails console development'
-
-alias rm='rm -i'
-alias be='bundle exec'
-alias dump_db='/vagrant/var/scripts/dump_db.zsh'
-alias rlog='tail -f log/development.log'
 
 
 
