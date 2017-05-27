@@ -1,15 +1,3 @@
-# 常用 alias
-alias n='cd nerv'
-alias ll='ls -al'
-alias rc='rails console development'
-
-alias rm='rm -i'
-alias be='bundle exec'
-alias dump_db='/vagrant/var/scripts/dump_db.zsh'
-alias rlog='tail -f log/development.log'
-
-
-
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -66,6 +54,18 @@ ZSH_THEME="garyblessington"
 plugins=(git)
 path=($path "$HOME/bin")
 source $ZSH/oh-my-zsh.sh
+
+# 常用 alias
+alias n='cd nerv'
+alias ll='ls -al'
+alias rc='rails console development'
+
+alias rm='rm -i'
+alias be='bundle exec'
+alias dump_db='/vagrant/var/scripts/dump_db.zsh'
+alias rlog='tail -f log/development.log'
+
+
 
 # User configuration
 
