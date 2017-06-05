@@ -17,6 +17,14 @@ nnoremap <silent> <S-tab> :bp<CR>
 nmap <leader>nl :set invlist list?<CR>    
 nmap <leader>iw :set invwrap wrap?<CR>    
 
+" move up/down lines
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+
 " Slimux
 nmap <Leader>rb :SlimuxShellRun ruby -Itest <C-R>=expand("%:f")<CR><CR>
 " nmap <Leader>rl :SlimuxShellLast<CR>
@@ -289,3 +297,4 @@ if executable('psql')
   let g:qrpsqlpq_expanded_format_max_lines = -1
   autocmd FileType sql call s:init_qrpsqlpq()
 endif
+
