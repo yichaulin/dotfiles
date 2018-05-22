@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/vagrant/.oh-my-zsh
+  export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -61,10 +61,9 @@ alias ll='ls -al'
 alias rc='rails console development'
 
 alias rm='rm -i'
-alias be='bundle exec'
 alias dump_db='/vagrant/var/scripts/dump_db.zsh'
-alias rlog='tail -f log/development.log'
-
+alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
+alias ngrok='/Applications/ngrok'
 
 
 # User configuration

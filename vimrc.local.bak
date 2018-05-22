@@ -1,12 +1,7 @@
 set cursorline " don't highlight current line
+set nolist
 set hidden
 set noswapfile
-set foldmethod=indent
-set foldlevel=4
-set foldlevelstart=99
-
-" select ALL
-map <C-A> ggVG
 
 " save
 inoremap <C-s> <ESC>:w<CR>
@@ -23,7 +18,7 @@ nmap <leader>nl :set invlist list?<CR>
 nmap <leader>iw :set invwrap wrap?<CR>    
 
 " move up/down lines
-nnoremap <C-p> :m .+1<CR>==
+nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
 inoremap <C-j> <Esc>:m .+1<CR>==gi
 inoremap <C-k> <Esc>:m .-2<CR>==gi
@@ -52,10 +47,23 @@ inoremap %<tab> <% %><Esc>hhi
 " Tab change
 nnoremap <S-tab> gT
 nnoremap <tab> gt
+j
+
+" RSpec.vim mappings
+let g:rspec_command = 'Dispatch rspec {spec}'
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+
+vmap <C-g><C-g> <Plug>SendSelectionToTmux
+nmap <C-c><C-c> <Plug>NormalModeSendToTmux
+nmap <C-c>r <Plug>SetTmuxVars
 
 " highlight search
 set hlsearch
-nmap <Leader>hl :let @/ = ""<CR>
+nmap <leader>hl :let @/ = ""<CR>
 
 " easyAlign
 vmap <Enter> <Plug>(EasyAlign)
@@ -114,6 +122,7 @@ silent! autocmd VimEnter * RemoveConflictingAlignMaps
 " theme
 set background=dark
 colorscheme blues
+set tabstop=2
 
 function! TmuxNewWindow(...)
   let options = a:0 ? a:1 : {}
@@ -190,46 +199,99 @@ function! TmuxNewWindow(...)
 endfunction
 " }}}
 
-function! s:rspec_test_tmux(method)
-  let type = rails#buffer().type_name()
-  let line_num = get(s:, 'last_test_line', '')
-  let path = get(s:, 'last_test_path', '')
-
-  if (type =~ '^test' || type =~ '^spec') && a:method != 'last'
-    let path = rails#buffer().relative()
-    let line_num = line('.')
-    let s:last_test_line = line_num
-    let s:last_test_path = path
-  end
-
-  if a:method == 'all_file'
-    let test_command = printf('rspec %s', path)
-  else
-    let test_command = printf('rspec %s:%s', path, line_num)
-  endif
-
-  call TmuxNewWindow({
-        \   "text": test_command,
-        \   "directory": rails#app().root,
-        \   "remember_pane": 1,
-        \   "method": a:method
-        \ })
-endfunction
 
 " Rails {{{
 function! s:rails_test_helpers()
   let type = rails#buffer().type_name()
   let relative = rails#buffer().relative()
-  if type =~ '^test' || type =~ '^spec' || (type == 'javascript-coffee' && relative =~ '^test/')
+  if type =~ '^test' || (type == 'javascript-coffee' && relative =~ '^test/')
     nmap \t [rtest]
-    nnoremap <silent> [rtest]j :call <SID>rspec_test_tmux('v')<CR>
-    nnoremap <silent> [rtest]l :call <SID>rspec_test_tmux('h')<CR>
-    nnoremap <silent> [rtest]t :call <SID>rspec_test_tmux('last')<CR>
-    nnoremap <silent> [rtest]w :call <SID>rspec_test_tmux('new-window')<CR>
-    nnoremap <silent> [rtest]q :call <SID>rspec_test_tmux('quit')<CR>
-    nnoremap <silent> [rtest]a :call <SID>rspec_test_tmux('all_file')<CR>
-    nnoremap <silent> [rtest]t :call <SID>rspec_test_tmux('last')<CR>
+    nnoremap <silent> [rtest]j :call <SID>rails_test_tmux('v')<CR>
+    nnoremap <silent> [rtest]l :call <SID>rails_test_tmux('h')<CR>
+    nnoremap <silent> [rtest]w :call <SID>rails_test_tmux('new-window')<CR>
+    nnoremap <silent> [rtest]. :call <SID>rails_test_tmux('last')<CR>
+    nnoremap <silent> [rtest]t :call <SID>rails_test_tmux('last')<CR>
+    nnoremap <silent> [rtest]q :call <SID>rails_test_tmux('quit')<CR>
+  end
+endfunction
+
+function! s:rails_test_tmux(method)
+  let [it, path] = ['', '']
+
+  let rails_type = rails#buffer().type_name()
+  let rails_relative = rails#buffer().relative()
+
+  if rails_type =~ '^test'
+    let it = matchstr(
+          \   getline(
+          \     search('^\s*it\s\+\(\)', 'bcnW')
+          \   ),
+          \   'it\s*[''"]\zs.*\ze[''"]'
+          \ )
+    let path = rails_relative
+  elseif rails_type == 'javascript-coffee' && rails_relative =~ '^test/'
+    " Currently, teaspoon can't filter specs without 'describe' title
+    " https://github.com/modeset/teaspoon/issues/304
+    let desc = matchstr(
+          \   getline(
+          \     search('^\s*describe\s*\(\)', 'bcnW')
+          \   ),
+          \   'describe\s*[''"]\zs.*\ze[''"]'
+          \ )
+    let it = matchstr(
+          \   getline(
+          \     search('^\s*it\s\+\(\)', 'bcnW')
+          \   ),
+          \   'it\s*[''"]\zs.*\ze[''"]'
+          \ )
+    let it = (empty(desc) || empty(it)) ?
+          \ '' :
+          \ join([desc, it], ' ')
+    let path = rails_relative
+  end
+
+  if empty(it) || empty(path)
+    let it   = get(s:, 'rails_test_tmux_last_it', '')
+    let path = get(s:, 'rails_test_tmux_last_path', '')
+  end
+
+  if empty(it) || empty(path)
+    echohl WarningMsg | echomsg 'No `it` block found' | echohl None
+    return
+  end
+
+  let s:rails_test_tmux_last_it = it
+  let s:rails_test_tmux_last_path = path
+
+  if rails_type == 'javascript-coffee'
+    " https://github.com/modeset/teaspoon/wiki/Teaspoon-Configuration
+    " TODO add back `--filter` if I can handle nested `describe` blocks
+    " let test_command = printf('RAILS_RELATIVE_URL_ROOT= teaspoon %s --fail-fast -f pride --filter %s', path, shellescape(it))
+    let test_command = printf('FAIL_FAST=true FORMATTERS=documentation rake teaspoon files=%s', path)
+    let title = '☕️'
+  " elseif rails_type == 'test-integration'
+  "   " TODO why can't just use ruby -Itest?
+  "   let test_command = printf('RAILS_RELATIVE_URL_ROOT= bundle exec rake test:integration TEST=%s', path)
+  "   let title = matchstr(rails_type, '\vtest-\zs.{4}')
+  else
+    let test_command = printf('ruby -Itest %s --name /%s/', path, shellescape(escape(it, '()')))
+    let type_short = matchstr(rails_type, '\vtest-\zs.{4}')
+    if type_short == 'unit'
+      let title = type_short
+    elseif type_short == 'func'
+      let title = type_short
+    else
+      let title = type_short
+    endif
   endif
+
+  call TmuxNewWindow({
+        \   "text": test_command,
+        \   "title": '∫ ' . title,
+        \   "directory": rails#app().root,
+        \   "remember_pane": 1,
+        \   "method": a:method
+        \ })
 endfunction
 
 autocmd User Rails call s:rails_test_helpers()
@@ -253,3 +315,5 @@ if executable('psql')
   let g:qrpsqlpq_expanded_format_max_lines = -1
   autocmd FileType sql call s:init_qrpsqlpq()
 endif
+
+let g:user_emmet_leader_key='<C->'
