@@ -84,12 +84,6 @@ let g:EasyMotion_space_jump_first = 1
 let g:EasyMotion_enter_jump_first = 1
 map <Nop> <Plug>(easymotion-prefix)
 
-" multiple cursor plugin setting
-
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<C-m>'
 
 " scroll
 nnoremap <Leader><space> <C-u>

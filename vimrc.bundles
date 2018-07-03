@@ -3,7 +3,7 @@
 " Maximum Awesome.
 " Please create ~/.vimrc.bundles.local and add any extra bundles you want there
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'airblade/vim-gitgutter'
+"Plugin 'airblade/vim-gitgutter'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'austintaylor/vim-indentobject'
 Plugin 'christoomey/vim-tmux-navigator'
