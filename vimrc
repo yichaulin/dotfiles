@@ -58,8 +58,6 @@ noremap <C-j> <C-w>j
 noremap <C-k> <C-w>k
 noremap <C-l> <C-w>l
 noremap <leader>l :Align
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>] :TagbarToggle<CR>
 nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
@@ -99,8 +97,10 @@ if executable('ag')
 endif
 "================================================================================
 " NerdTree
+nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
 let NERDTreeShowHidden=1
-
+let NERDTreeIgnore=['\.git$', '\.DS_Store', '\~$']
 
 "================================================================================
 " gutentags
