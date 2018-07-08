@@ -75,6 +75,8 @@ nnoremap <leader>t :CtrlP<CR>
 nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nnoremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_match_window = 'order:ttb,max:20'
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
 "================================================================================
 " vim-multiple-cursors
 let g:multi_cursor_use_default_mapping=0
@@ -92,11 +94,15 @@ if executable('ag')
   set grepprg=ag\ --nogroup\ --nocolor
 
   " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
   let g:ctrlp_use_caching = 0
 endif
 "================================================================================
+"NerdTree
+let NERDTreeShowHidden=1
 
+
+"================================================================================
 
 " auto command settings
 " fdoc is yaml
