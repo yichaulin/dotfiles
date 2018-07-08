@@ -1,3 +1,6 @@
+" 配置 ctags 的参数
+let g:gutentags_ctags_extra_args = ['--fields=+aimlS', '--languages=ruby', '--exclude="\.git"', '--exclude=node_modules', '--exclude=config', '--RUBY-kinds=+cfmS']
+
 function! TmuxNewWindow(...)
   let options = a:0 ? a:1 : {}
   let text = get(options, 'text', '')

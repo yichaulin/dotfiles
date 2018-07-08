@@ -117,11 +117,6 @@ let g:gutentags_cache_dir = s:vim_tags
 if !isdirectory(s:vim_tags)
    silent! call mkdir(s:vim_tags, 'p')
 endif
-
-" 配置 ctags 的参数
-let g:gutentags_ctags_extra_args = ['--fields=+aimlS', '--languages=+php,ruby', '--exclude="\.git"', '--exclude=node_modules', '--exclude=config']
-let g:gutentags_ctags_extra_args += ['--PHP-kinds=+cdfint-av', '--exclude=composer.phar', '--exclude=*Test.php', '--exclude=*phpunit*']
-let g:gutentags_ctags_extra_args += ['--RUBY-kinds=+cfmS']
 "================================================================================
 
 
