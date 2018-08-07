@@ -1,9 +1,11 @@
 set cursorline " don't highlight current line
 set hidden
 set noswapfile
+
+" fold setting
 set foldmethod=indent
-set foldlevel=4
 set foldlevelstart=99
+nnoremap <Leader>z za
 
 " select ALL
 map <C-A> ggVG
@@ -39,8 +41,8 @@ nmap <Leader>rb :SlimuxShellRun ruby -Itest <C-R>=expand("%:f")<CR><CR>
 " nmap <Leader>rl :SlimuxShellLast<CR>
 nmap <Leader>rc :SlimuxShellConfigure<CR>
 
-inoremap jj <ESC>:w<CR>
-inoremap kk <ESC>:w<CR>
+inoremap jj <ESC>
+inoremap kk <ESC>
 inoremap ,, <ESC>
 inoremap (<tab> ()<Esc>i
 inoremap '<tab> ''<Esc>i
