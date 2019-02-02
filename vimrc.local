@@ -16,6 +16,9 @@ noremap <C-s> :w<CR>
 " quit
 noremap <C-q> :q<CR>
 noremap <C-b><C-d> :bd<CR>
+" next line
+inoremap <C-o> <ESC>o
+
 
 " keyboard shortcuts
 nmap <silent> <leader>w <C-w>
@@ -25,7 +28,7 @@ nmap <leader>nl :set invlist list?<CR>
 nmap <leader>iw :set invwrap wrap?<CR>    
 
 " move up/down lines
-nnoremap <C-p> :m .+1<CR>==
+nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
 inoremap <C-j> <Esc>:m .+1<CR>==gi
 inoremap <C-k> <Esc>:m .-2<CR>==gi
@@ -35,11 +38,6 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 "emmet setting
 imap <S-tab> <C-Y>,
 let g:user_emmet_mode='i'
-
-" Slimux
-nmap <Leader>rb :SlimuxShellRun ruby -Itest <C-R>=expand("%:f")<CR><CR>
-" nmap <Leader>rl :SlimuxShellLast<CR>
-nmap <Leader>rc :SlimuxShellConfigure<CR>
 
 inoremap jj <ESC>
 inoremap kk <ESC>
@@ -59,37 +57,47 @@ nnoremap <tab> gt
 set hlsearch
 nmap <Leader>hl :let @/ = ""<CR>
 
-" easyAlign
-vmap <Enter> <Plug>(EasyAlign)
+" theme
+set background=dark
+colorscheme blues
 
-map <Leader>e <Plug>(easymotion-w)
-nmap <Leader>E <Plug>(easymotion-overwin-w)
-xmap <Leader>E <Plug>(easymotion-bd-w)
-omap <Leader>E <Plug>(easymotion-bd-w)
-map <Leader>L <Plug>(easymotion-j)
-map <Leader>H <Plug>(easymotion-k)
-map <Leader>n <Plug>(easymotion-n)
-map <Leader>N <Plug>(easymotion-N)
-map <Leader>s <Plug>(easymotion-overwin-f2)
+
+" Slimux
+" nmap <Leader>rb :SlimuxShellRun ruby -Itest <C-R>=expand("%:f")<CR><CR>
+" nmap <Leader>rl :SlimuxShellLast<CR>
+" nmap <Leader>rc :SlimuxShellConfigure<CR>
+
+" easyAlign
+" vmap <Enter> <Plug>(EasyAlign)
+
+" map <Leader>e <Plug>(easymotion-w)
+" nmap <Leader>E <Plug>(easymotion-overwin-w)
+" xmap <Leader>E <Plug>(easymotion-bd-w)
+" omap <Leader>E <Plug>(easymotion-bd-w)
+" map <Leader>L <Plug>(easymotion-j)
+" map <Leader>H <Plug>(easymotion-k)
+" map <Leader>n <Plug>(easymotion-n)
+" map <Leader>N <Plug>(easymotion-N)
+" map <Leader>s <Plug>(easymotion-overwin-f2)
 " map <Leader>J <Plug>(easymotion-jumptoanywhere)
 " omap <Leader>l <Plug>(easymotion-special-l)
 " omap <Leader>p <Plug>(easymotion-special-p)
 " xmap <Leader>l <Plug>(easymotion-special-l)
 " xmap <Leader>p <Plug>(easymotion-special-p)
-nmap <Leader>; <Plug>(easymotion-next)
-nmap <Leader>: <Plug>(easymotion-prev)
-let g:EasyMotion_keys = tolower('asdghklqwertyuiopzxcvbnmfj;')
-let g:EasyMotion_use_upper = 0
-let g:EasyMotion_smartcase = 1
-let g:EasyMotion_startofline = 0
-let g:EasyMotion_space_jump_first = 1
-let g:EasyMotion_enter_jump_first = 1
-map <Nop> <Plug>(easymotion-prefix)
+" nmap <Leader>; <Plug>(easymotion-next)
+" nmap <Leader>: <Plug>(easymotion-prev)
+" let g:EasyMotion_keys = tolower('asdghklqwertyuiopzxcvbnmfj;')
+" let g:EasyMotion_use_upper = 0
+" let g:EasyMotion_smartcase = 1
+" let g:EasyMotion_startofline = 0
+" let g:EasyMotion_space_jump_first = 1
+" let g:EasyMotion_enter_jump_first = 1
+" map <Nop> <Plug>(easymotion-prefix)
 
 
 " scroll
-nnoremap <Leader><space> <C-u>
-nnoremap <space> <C-d>
+" nnoremap <Leader><space> <C-u>
+" nnoremap <space> <C-d>
 
 " Disambiguate ,a & ,t from the Align plugin, making them fast again.
 "
@@ -99,33 +107,29 @@ nnoremap <space> <C-d>
 "
 " If you do want the AlignMaps mappings, remove this section, remove
 " ~/.vim/bundle/Align, and re-run rake in maximum-awesome.
-function! s:RemoveConflictingAlignMaps()
-  if exists("g:loaded_AlignMapsPlugin")
-    AlignMapsClean
-  endif
-endfunction
-command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
-silent! autocmd VimEnter * RemoveConflictingAlignMaps
+" function! s:RemoveConflictingAlignMaps()
+"   if exists("g:loaded_AlignMapsPlugin")
+"     AlignMapsClean
+"   endif
+" endfunction
+" command! -nargs=0 RemoveConflictingAlignMaps call s:RemoveConflictingAlignMaps()
+" silent! autocmd VimEnter * RemoveConflictingAlignMaps
 
-" theme
-set background=dark
-colorscheme blues
+" function! s:init_qrpsqlpq()
+"   nmap <buffer> <Leader>r [qrpsqlpq]
+"   nnoremap <silent> <buffer> [qrpsqlpq]j :call qrpsqlpq#run('split')<CR>
+"   nnoremap <silent> <buffer> [qrpsqlpq]l :call qrpsqlpq#run('vsplit')<CR>
+"   nnoremap <silent> <buffer> [qrpsqlpq]r :call qrpsqlpq#run()<CR>
 
-function! s:init_qrpsqlpq()
-  nmap <buffer> <Leader>r [qrpsqlpq]
-  nnoremap <silent> <buffer> [qrpsqlpq]j :call qrpsqlpq#run('split')<CR>
-  nnoremap <silent> <buffer> [qrpsqlpq]l :call qrpsqlpq#run('vsplit')<CR>
-  nnoremap <silent> <buffer> [qrpsqlpq]r :call qrpsqlpq#run()<CR>
+"   if !exists('b:rails_root')
+"     call RailsDetect()
+"   endif
+"   if !exists('b:rails_root')
+"     let b:qrpsqlpq_db_name = 'postgres'
+"   endif
+" endfunction
 
-  if !exists('b:rails_root')
-    call RailsDetect()
-  endif
-  if !exists('b:rails_root')
-    let b:qrpsqlpq_db_name = 'postgres'
-  endif
-endfunction
-
-if executable('psql')
-  let g:qrpsqlpq_expanded_format_max_lines = -1
-  autocmd FileType sql call s:init_qrpsqlpq()
-endif
+" if executable('psql')
+"   let g:qrpsqlpq_expanded_format_max_lines = -1
+"   autocmd FileType sql call s:init_qrpsqlpq()
+" endif

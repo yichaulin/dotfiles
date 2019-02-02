@@ -54,14 +54,14 @@ endif
 
 " keyboard shortcuts
 let mapleader = ','
-noremap <C-h> <C-w>h
-noremap <C-j> <C-w>j
-noremap <C-k> <C-w>k
-noremap <C-l> <C-w>l
-noremap <leader>l :Align
-nnoremap <leader>] :TagbarToggle<CR>
-nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
+" noremap <C-h> <C-w>h
+" noremap <C-j> <C-w>j
+" noremap <C-k> <C-w>k
+" noremap <C-l> <C-w>l
+" noremap <leader>l :Align
+" nnoremap <leader>] :TagbarToggle<CR>
+" nnoremap <leader><space> :call whitespace#strip_trailing()<CR>
+"nnoremap <leader>g :GitGutterToggle<CR>
 noremap <silent> <leader>V :source ~/.vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " in case you forgot to sudo
@@ -76,14 +76,15 @@ nnoremap <leader>b :CtrlPBuffer<CR>
 let g:ctrlp_match_window = 'order:ttb,max:20'
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_user_command = 'ag %s -l --hidden --nocolor -g ""'
+let g:ctrlp_dont_split = 'nerdtree'
 "================================================================================
-" vim-multiple-cursors
-let g:multi_cursor_use_default_mapping=0
-let g:multi_cursor_next_key='<C-n>'
-let g:multi_cursor_prev_key='<C-p>'
-let g:multi_cursor_skip_key='<C-x>'
-let g:multi_cursor_quit_key='<C-m>'
-"================================================================================
+"" vim-multiple-cursors
+"let g:multi_cursor_use_default_mapping=0
+"let g:multi_cursor_next_key='<C-n>'
+"let g:multi_cursor_prev_key='<C-p>'
+"let g:multi_cursor_skip_key='<C-x>'
+"let g:multi_cursor_quit_key='<C-m>'
+""================================================================================
 " Ag
 nnoremap <leader>a :Ag<space>
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
