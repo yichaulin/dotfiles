@@ -8,7 +8,8 @@ set foldlevelstart=99
 nnoremap <Leader>z za
 
 " select ALL
-map <C-A> ggVG
+noremap <C-A> ggVG
+noremap == ggVG=
 
 " save
 inoremap <C-s> <ESC>:w<CR>
