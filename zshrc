@@ -5,6 +5,7 @@ export LANG=en_US.UTF-8
 
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
+export PATH="/usr/local/lib/ruby/gems/2.5.0/bin:/usr/local/opt/ruby/bin:$PATH"
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -58,7 +59,6 @@ path=($path "$HOME/bin")
 source $ZSH/oh-my-zsh.sh
 
 # 常用 alias
-alias n='cd nerv'
 alias ll='ls -al'
 alias rc='rails console development'
 
@@ -67,6 +67,7 @@ alias dump_db='/vagrant/var/scripts/dump_db.zsh'
 alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
 alias ngrok='/Applications/ngrok'
 alias dc='docker-compose'
+alias nl='nslookup'
 
 
 # User configuration
