@@ -1,8 +1,3 @@
-reset_prompt() {
-  local prefix=${AWS_PROFILE:-default}
-  PS1="%{$fg_bold[yellow]%}[${prefix}] %{$reset_color%}%{$fg[cyan]%}%c%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}: "
-}
-
 switch_aws() {
   local profiles=($(grep -w '\[.*\]' ~/.aws/credentials | tr -d '[]'))
 
@@ -16,7 +11,6 @@ switch_aws() {
   local selected_value=${profiles[$selected_answer]}
 
   export AWS_PROFILE=$selected_value
-  reset_prompt
 }
 
 switch() {
@@ -28,5 +22,3 @@ switch() {
     exit 0
   fi
 }
-
-reset_prompt

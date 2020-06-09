@@ -111,4 +111,6 @@ eval "$(pyenv virtualenv-init -)"
 source "$HOME/.mdaq_bash_profile"
 source "/usr/local/etc/profile.d/autojump.sh"
 
+
+PS1='%{$fg_bold[yellow]%}[${AWS_PROFILE:-default}] %{$reset_color%}%{$fg[cyan]%}%c%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}: '
 source "$HOME/.zsh/switch.zsh"
