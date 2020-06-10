@@ -28,7 +28,7 @@ switch_k8s() {
   local selected_value=${k8s_roles[$selected_answer]}
   kubectl config use-context $selected_value
   
-  if [ $selected_value = "prod-*" ]; then
+  if [[ $selected_value == prod-* ]]; then
     export AWS_PROFILE="mdaq-prod"
   else
     export AWS_PROFILE="mdaq-nonprod"
