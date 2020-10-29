@@ -15,7 +15,7 @@ switch_aws() {
 }
 
 switch_k8s() {
-  local k8s_roles=(fuat-operator uat-operator prod-operator)
+  local k8s_roles=(minikube fuat-operator uat-operator prod-operator)
 
   for i in {1..$#k8s_roles}; do
     echo "${i}. ${k8s_roles[i]}"
