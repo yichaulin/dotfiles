@@ -6,6 +6,8 @@ export LANG=en_US.UTF-8
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 export PATH="/usr/local/lib/ruby/gems/2.5.0/bin:/usr/local/opt/ruby/bin:$PATH"
+export N_PREFIX=$HOME/.n
+export PATH=$N_PREFIX/bin:$PATH
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -60,12 +62,8 @@ source $ZSH/oh-my-zsh.sh
 
 # 常用 alias
 alias ll='ls -al'
-alias rc='rails console development'
 
 alias rm='rm -i'
-alias dump_db='/vagrant/var/scripts/dump_db.zsh'
-alias stree='/Applications/SourceTree.app/Contents/Resources/stree'
-alias ngrok='/Applications/ngrok'
 alias dc='docker-compose'
 alias nl='nslookup'
 
@@ -100,18 +98,13 @@ alias nl='nslookup'
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # disable START/STOP output control (<C-S>, <C-Q>)
-stty -ixon
 
 # bindkey '^[' forward-word                        # [Ctrl-RightArrow] - move forward one word
 # bindkey '^[' backward-word 
 
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
-
-source "$HOME/.mdaq_bash_profile"
-source "/usr/local/etc/profile.d/autojump.sh"
 
 
-PS1='%{$fg_bold[yellow]%}[${AWS_PROFILE:-default}]%{$fg_bold[magenta]%}[$(kubectl config current-context)] %{$reset_color%}%{$fg[cyan]%}%c%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}: '
-source "$HOME/.zsh/switch.zsh"
+#PS1='%{$fg_bold[yellow]%}[${AWS_PROFILE:-default}]%{$fg_bold[magenta]%}[$(kubectl config current-context)] %{$reset_color%}%{$fg[cyan]%}%c%{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%}% %{$reset_color%}: '
+#source "$HOME/.zsh/switch.zsh"
+[[ -s "/Users/yichao/.gvm/scripts/gvm" ]] && source "/Users/yichao/.gvm/scripts/gvm"
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
