@@ -1,0 +1,21 @@
+keybind = global:control+/=toggle_visibility
+
+# 全域快捷鍵
+keybind = global:control+\=toggle_quick_terminal
+quick-terminal-position = right
+quick-terminal-autohide = true
+quick-terminal-animation-duration = 0.15
+quick-terminal-size = 30%,100%
+
+
+
+# 外觀自定義 (選配)
+theme = Dark+
+font-family = "JetBrains Mono"
+font-size = 16
+background-opacity = 0.9
+background-blur-radius = 20
+
+shell-integration-features = no-cursor
+cursor-style-blink = false
+cursor-style = block

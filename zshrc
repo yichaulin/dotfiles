@@ -1,3 +1,5 @@
+clear
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/opt/homebrew/bin:$PATH
@@ -105,5 +107,11 @@ source $ZSH/oh-my-zsh.sh
 # 常用 alias
 alias ll='ls -al'
 alias rm='rm -i'
-alias dc='docker-compose'
+alias dc='docker compose'
 alias nl='nslookup'
+alias be='bundle exec'
+export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
+
+alias cc='docker run --rm -it -v $(pwd):/app -v /app/.claude -v ~/.claude/settings.json:/root/.claude/settings.json -e GOPROXY=https://nexus.skyunion.net/repository/go-group,https://proxy.golang.org,direct -e GONOSUMDB="git.skyunion.net/*" claude-code-dev-sandbox:latest'
+
+printf "\n%.0s" {1..$LINES}
