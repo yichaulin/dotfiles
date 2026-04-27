@@ -19,7 +19,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" )
 
 ZSH_THEME="robbyrussell"
-source $ZSH/oh-my-zsh.sh
 
 
 
@@ -32,6 +31,7 @@ source $ZSH/oh-my-zsh.sh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git asdf colorize)
+source $ZSH/oh-my-zsh.sh
 
 
 
